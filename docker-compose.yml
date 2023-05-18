@@ -8,10 +8,14 @@ services:
     build:
       context: .
       dockerfile: ./docker/php/Dockerfile
+      args:
+        - UID=${UID}
+        - GID=${GID}
     volumes:
       - ./htdocs/:/var/www/html
     depends_on:
       - mysql
+    user: "${UID}:${GID}"
 
   nginx:
     build:
