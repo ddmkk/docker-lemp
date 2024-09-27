@@ -3,9 +3,11 @@
 Docker による LEMP 環境
 
 ## 環境
-- PHP:8.1
-- Nginx
-- MySQL:5.7
+- PHP:8.3
+- nginx:1.27.1
+- MySQL:9.0
+- phpMyAdmin
+- MailHog
 
 ### [データベース]
 
