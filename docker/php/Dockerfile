@@ -1,5 +1,6 @@
 # FROM php:8.1-fpm
-FROM php:8.3.12-fpm
+# FROM php:8.3.12-fpm
+FROM php:8.4.14-fpm
 
 # COPY ./docker/php/php.ini /usr/local/etc/app/php.ini
 COPY ./docker/php/php.ini /usr/local/etc/php/php.ini
@@ -30,13 +31,15 @@ RUN set -ex; \
     libpng-dev \
     libwebp-dev \
     libzip-dev \
+    pkg-config \
   ; \
   \
-  docker-php-ext-configure gd \
-    --with-freetype \
-    --with-jpeg \
-    --with-webp \
-  ; \
+  # php 8.4では不要。むしろエラーが発生する
+  # docker-php-ext-configure gd --enable-gd \
+    # --with-freetype \
+    # --with-jpeg \
+    # --with-webp \
+  # ; \
   docker-php-ext-install -j "$(nproc)" \
     bcmath \
     exif \
@@ -45,10 +48,19 @@ RUN set -ex; \
     mysqli \
     zip \
   ; \
-  pecl install imagick-3.6.0; \
+  \
+  # pecl install imagick-3.6.0; \
+  # docker-php-ext-enable imagick; \
+  # rm -r /tmp/pear
+  # ✅ GitHubのImagick最新版を取得してビルド（PHP 8.4対応）
+  git clone https://github.com/Imagick/imagick.git /tmp/imagick; \
+  cd /tmp/imagick; \
+  phpize; \
+  ./configure; \
+  make -j"$(nproc)"; \
+  make install; \
   docker-php-ext-enable imagick; \
-  rm -r /tmp/pear
-
+  rm -rf /tmp/imagick
 
 # コンテナでの作業ディレクトリを指定(docker-compose exec app bashを利用した時のカレントディレクトリになる)
 WORKDIR /var/www/html
