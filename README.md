@@ -69,6 +69,13 @@ make wp ARGS="config create --dbname=wordpress --dbpass=password"
 make wp ARGS="core install --url=http://localhost:8080 --title=サイト名 --admin_user=admin --admin_password=admin --admin_email=admin@example.com --skip-email"
 ```
 
+- `core install` は英語でインストールされるため、日本語化するには続けて次を実行します。
+
+  ```
+  make wp ARGS="language core install ja --activate"
+  make wp ARGS="option update timezone_string Asia/Tokyo"
+  ```
+
 - `core download` は日本語版、`config create` は `dbhost=db` / `dbuser=root` / `utf8mb4` が既定です
   (`docker/php/wp-cli.yml`)。
 - 既存の `htdocs/index.php`(phpinfo)がある場合、`core download` は `--force` が必要です。
