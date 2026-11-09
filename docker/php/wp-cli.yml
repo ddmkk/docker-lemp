@@ -1,0 +1,41 @@
+# wp-cliのグローバル設定(コンテナ内の /usr/local/etc/wp-cli.yml)
+path: /var/www/html
+
+# 日本語版WordPressを既定にする
+core download:
+  locale: ja
+
+# wp config create の既定値(パスワードは引数で指定すること)
+config create:
+  dbhost: db
+  dbuser: root
+  dbcharset: utf8mb4
+  locale: ja
+
+# mysqlクライアントを呼ぶdb系コマンドで、オプションファイル(自己署名証明書対策のskip-ssl)を読み込む
+db check:
+  defaults: true
+db clean:
+  defaults: true
+db cli:
+  defaults: true
+db create:
+  defaults: true
+db drop:
+  defaults: true
+db export:
+  defaults: true
+db import:
+  defaults: true
+db optimize:
+  defaults: true
+db query:
+  defaults: true
+db repair:
+  defaults: true
+db reset:
+  defaults: true
+db search:
+  defaults: true
+db size:
+  defaults: true

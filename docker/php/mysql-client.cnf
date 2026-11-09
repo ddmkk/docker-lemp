@@ -1,0 +1,4 @@
+; 開発用: MySQL 9の自己署名証明書でmysql/wp dbが失敗しないようSSLを無効にする
+[client]
+skip-ssl
+default-character-set = utf8mb4
