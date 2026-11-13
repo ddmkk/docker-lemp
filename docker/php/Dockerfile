@@ -1,4 +1,4 @@
-FROM php:8.4.27-fpm
+FROM php:8.5.12-fpm
 
 # Mailpitのsendmail互換バイナリを取り込む(PHPのmail()をMailpitへ転送するため)
 COPY --from=axllent/mailpit:v1.33.1 /mailpit /usr/local/bin/mailpit
@@ -33,14 +33,14 @@ RUN set -eux; \
     vim \
     zip \
   ; \
-  # PHP 8.4ではgdのconfigureオプション指定は不要
+  # PHP 8.5ではgdのconfigureオプション指定は不要
+  # opcacheはPHP 8.5から本体に組み込まれたため、ここでは導入しない
   docker-php-ext-install -j "$(nproc)" \
     bcmath \
     exif \
     gd \
     intl \
     mysqli \
-    opcache \
     zip \
   ; \
   # Imagickはバージョンを固定してpeclから導入する

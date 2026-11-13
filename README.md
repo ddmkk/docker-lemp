@@ -6,7 +6,7 @@ Docker による LEMP 環境(WordPress 開発向け・wp-cli 付き)
 
 | 対象 | バージョン |
 |---|---|
-| PHP (fpm) | 8.4.27 |
+| PHP (fpm) | 8.5.12 |
 | nginx | 1.31.8 |
 | MySQL | 9.7.4 |
 | phpMyAdmin | 5.2.3 |
